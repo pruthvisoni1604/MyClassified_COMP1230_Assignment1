@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: rgb(11, 145, 155);
+}
+
+.active {
+    background-color: rgb(6, 100, 107);
+    color: white;
+}
+
+.navbar a,
+b {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropBtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navbar a:hover,
+.dropdown:hover .dropBtn,
+.dropBtn:focus {
+    background-color: rgb(6, 100, 107);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    color: white;
+    background-color: rgb(65, 168, 175);
+}
+
+.show {
+    display: block;
+}
+
+.mainDiv {
+    background-color: rgb(243, 243, 243);
+    margin: 20px;
+    border-radius: 5px;
+    position: absolute;
+}
+
+.subDiv {
+    position: relative;
+    margin: 50px;
+}
+
+#mainButton {
+    color: white;
+    background-color: rgb(33, 92, 253);
+    border-radius: 5px;
+    border: none;
+}
+
+#btnMargin {
+    margin: 10px;
+}
+
+.sideNav {
+    width: 16%;
+    position: fixed;
+    z-index: 1;
+    left: 10px;
+    overflow-x: hidden;
+}
+
+.sideNav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    color: rgb(65, 168, 175);
+    display: block;
+    border-right: solid gray 1px;
+    border-left: solid gray 1px;
+    border-top: solid gray 1px;
+    padding: 15px;
+}
+
+.sideNav a:hover {
+    color: white;
+    background-color: rgb(65, 168, 175);
+}
+
+.main {
+    margin-left: 18%;
+    /* Same width as the sidebar + left position in px */
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sideNav {
+        padding-top: 15px;
+    }
+    .sideNav a {
+        font-size: 18px;
+    }
+}
