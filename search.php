@@ -34,21 +34,21 @@
 <body>
     <div class="navbar">
         <b>My Classified</b>
-        <a href="index.html">Home</a>
-        <a href="items.html">Items</a>
+        <a href="index.php" class="active">Home</a>
+        <a href="items.php">Items</a>
         <div class="dropdown">
             <button class="dropBtn" onclick="dropFunction()">Categories &#9662;</button>
             <div class="dropdown-content" id="dropdown">
-                <a href="#">Electronics</a>
-                <a href="#">Men's Fashion</a>
-                <a href="#">Women's Fashion</a>
-                <a href="#">Home accessories</a>
-                <a href="#">Books</a>
-                <a href="#">Toys</a>
+                <a href="electronics.html">Electronics</a>
+                <a href="mens_fashion.html">Men's Fashion</a>
+                <a href="womens_fashion.html">Women's Fashion</a>
+                <a href="home_accessories.html">Home accessories</a>
+                <a href="books.html">Books</a>
+                <a href="toys.html">Toys</a>
             </div>
         </div>
-        <a href="search.html" class="active">Search</a>
-        <a href="login.html" style="float: right;"><i class="fa fa-sign-in"></i> Log-in</a>
+        <a href="search.php">Search</a>
+        <a href="login.php" style="float: right;"> <i class="fa fa-sign-in"></i> Log-in</a>
     </div>
     <div class="sideNav">
         <h2 style="color: rgb(65, 168, 175); text-align: center; font-size: 20px;">Categories</h2>

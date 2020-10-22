@@ -22,8 +22,8 @@
 <body>
     <div class="navbar">
         <b>My Classified</b>
-        <a href="index.html">Home</a>
-        <a href="items.html">Items</a>
+        <a href="index.php" class="active">Home</a>
+        <a href="items.php">Items</a>
         <div class="dropdown">
             <button class="dropBtn" onclick="dropFunction()">Categories &#9662;</button>
             <div class="dropdown-content" id="dropdown">
@@ -35,8 +35,8 @@
                 <a href="toys.html">Toys</a>
             </div>
         </div>
-        <a href="search.html">Search</a>
-        <a href="login.html" style="float: right;"><i class="fa fa-sign-in"></i> Log-in</a>
+        <a href="search.php">Search</a>
+        <a href="login.php" style="float: right;"> <i class="fa fa-sign-in"></i> Log-in</a>
     </div>
     <div class="login">
         <label for="uname">Username</label>
