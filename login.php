@@ -1,3 +1,20 @@
+<?php
+session_start();
+
+for ($i = 0; $i < sizeof(file('adminDetails')); $i++) {
+    $user_info = explode(':', file('adminDetails')[$i]);
+
+    if ($user_info[0] == get('username') && trim($user_info[1]) == md5(get('password'))) {
+        $_SESSION['user_logged_in'] = true;
+        header('Location: index.php');
+        exit();
+    }
+}
+function get($name)
+{
+    return $_REQUEST[$name] ?? '';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,16 +56,18 @@
         <a href="login.php" style="float: right;"> <i class="fa fa-sign-in"></i> Log-in</a>
     </div>
     <div class="login">
-        <label for="uname">Username</label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
+        <form action="">
+            <label for="username">Username</label>
+            <input type="text" for="username" name="username" placeholder="username" required>
 
-        <label for="psw">Password</label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+            <label for="password">Password</label>
+            <input type="password" for="password" name="password" placeholder="password" required>
 
-        <button type="submit">Login</button>
-        <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
+            <button type="submit">Login</button>
+            <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label>
+        </form>
     </div>
 </body>
 

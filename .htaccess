@@ -29,4 +29,3 @@ AuthName "GBLearn"
 require valid-user
 </Limit>
 #END
-
