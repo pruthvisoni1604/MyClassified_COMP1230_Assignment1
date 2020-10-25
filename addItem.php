@@ -56,9 +56,9 @@
                 <tr>
                     <td>
                         <label for="title"> Title : </label>
-                        <input type="text" name="fname" placeholder="title" style="width : 600px">
+                        <input type="text" name="title" placeholder="Enter Title" style="width : 600px">
                     </td>
-                <tr>
+                </tr>
                 <tr>
                     <td>
                         <label for="description"> Description :</label>
@@ -67,25 +67,34 @@
                 </tr>
                 <tr>
                     <td>
-                        <label fpr="categories">Categories :</label>
+                        <label for="categories">Categories :</label>
                         <select name="categories" id="categories">
+                            <option>Books</option>
                             <option>Electronics</option>
-                            <option>Men's Fashion</option>
+                            <option>Home Accessories</option>
                             <option>Men's Fashion</option>
                             <option>Women's Fashion</option>
-                            <option>Books</option>
+                            <option>Toys</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label for="price">Price :</label>
-                        <input type="number" name="price" placeholder="price">
+                        <input type="number" name="price" placeholder="Enter Price">
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <label for="image">Image : </label>
                         <input type="file" name="file"><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         <button type="submit" name="submit"> Save Changes </button>
+                    </td>
+                </tr>
             </form>
         </table>
     </div>
