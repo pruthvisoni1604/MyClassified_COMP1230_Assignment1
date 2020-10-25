@@ -36,7 +36,7 @@
     <div class="mainDiv">
         <div class="subDiv">
             <p style="font-size: 60px; margin: 0;">Hello, Welcome to My Classified</p>
-            <p>This is our first assignment of web development and this website is created by Pruthvi, Sahay and Namya. It is a dummy model of online retailer website. Moreover, people can sell or buy things from the website </p>
+            <p>This is our first assignment of advanced web programming and this website is created by Pruthvi, Sahay and Namya. It is a dummy model of online retailer website where people can buy things from the website </p>
             <button id="mainButton" onclick="items.html">
                 <div id="btnMargin" >
                     View Our Items <i class="fa fa-angle-double-right"></i>

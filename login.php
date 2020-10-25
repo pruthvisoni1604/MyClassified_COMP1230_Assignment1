@@ -15,6 +15,10 @@ function get($name)
     return $_REQUEST[$name] ?? '';
 }
 ?>
+<?php
+include 'checkAccess.php';
+$isLoggedIn = check_access(true);
+?>
 <!DOCTYPE html>
 <html lang="en">
 

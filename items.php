@@ -57,7 +57,7 @@
         <div class="main">
             <h2 style="color: rgb(65, 168, 175); font-size: 20px;">Items</h2>
             <?php
-            item();
+                item();
             ?>
         </div>
         <?php
