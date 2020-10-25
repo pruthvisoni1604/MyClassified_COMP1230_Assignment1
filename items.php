@@ -46,39 +46,33 @@
         <h2 style="color: rgb(65, 168, 175); font-size: 20px;">Items</h2>
         <p>This sidebar is as tall as its content (the links), and is always shown.</p>
         <p>Scroll down the page to see the result.</p>
-        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint
-            efficiantur his ad. Eum no molestiae voluptatibus.</p>
-        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint
-            efficiantur his ad. Eum no molestiae voluptatibus.</p>
-        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint
-            efficiantur his ad. Eum no molestiae voluptatibus.</p>
-        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint
-            efficiantur his ad. Eum no molestiae voluptatibus.</p>
         <div class="main">
             <h2 style="color: rgb(65, 168, 175); font-size: 20px;">Items</h2>
             <?php
-                item();
+            for ($i = 0; $i < sizeof(file('itemDetails.txt')); $i++) {
+                $item_info = explode(':', file('itemDetails.txt')[$i]);
+                item($item_info);
+            }
             ?>
         </div>
         <?php
-        function item()
+        function item($item_info)
         {
-            $title = "item Title";
             echo '
                 <div>
                     <div class="image">
-                        <img src="assets/img/No_Image_Available.png" alt="No No_Image_Available" width="300px">
+                        <img src="assets/img/'.$item_info[4].'" alt="No No_Image_Available" width="300px">
                     </div>  
                     <div class="itemMargin">
-                        <h2>$title</h2>
+                        <h2>'.$item_info[0].'</h2>
                     </div>
                     <div class="itemMargin">
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, est. Ipsa quia, consequuntur dolore nobis sequi, consectetur dolorum laudantium possimus aut asperiores tempore debitis! Ab esse ratione fugiat recusandae dignissimos.
+                            '.$item_info[2].'
                         </p>
                     </div>
                     <div class="itemMargin">
-                        <p><i class="fa fa-shopping-cart" aria-hidden="true"></i> Price : call</p>
+                        <p><i class="fa fa-shopping-cart" aria-hidden="true"></i> Price : $'.$item_info[3].'</p>
                     </div>
                     <div class="itemButtons">
                         <button class="itemModifyBtn">

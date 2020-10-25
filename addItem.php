@@ -69,11 +69,11 @@
                     <td>
                         <label for="categories">Categories :</label>
                         <select name="categories" id="categories">
-                            <option>Books</option>
                             <option>Electronics</option>
-                            <option>Home Accessories</option>
                             <option>Men's Fashion</option>
                             <option>Women's Fashion</option>
+                            <option>Home Accessories</option>
+                            <option>Books</option>
                             <option>Toys</option>
                         </select>
                     </td>
