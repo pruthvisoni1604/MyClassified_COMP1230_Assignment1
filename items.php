@@ -51,12 +51,12 @@
             <?php
             for ($i = 0; $i < sizeof(file('itemDetails.txt')); $i++) {
                 $item_info = explode(':', file('itemDetails.txt')[$i]);
-                item($item_info);
+                item($item_info,$i);
             }
             ?>
         </div>
         <?php
-        function item($item_info)
+        function item($item_info,$numberOfItem)
         {
             echo '
                 <div>
@@ -75,7 +75,7 @@
                         <p><i class="fa fa-shopping-cart" aria-hidden="true"></i> Price : $'.$item_info[3].'</p>
                     </div>
                     <div class="itemButtons">
-                        <button class="itemModifyBtn">
+                        <button class="itemModifyBtn" onclick="window.location.href=\'addItem.php?edit='.$numberOfItem.'\';">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                             Modify
                         </button>
