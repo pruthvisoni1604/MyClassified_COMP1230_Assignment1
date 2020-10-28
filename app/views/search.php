@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creating a responsive website with the help of html,css and php">
     <meta name="keywords" content="">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/app/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="assets/js/script.js"></script>
+    <script src="/app/assets/js/script.js"></script>
     <style>
         form.search input[type=text] {
             padding: 5px;
@@ -20,7 +20,7 @@
             background: #f1f1f1;
             border-radius: 15px;
         }
-        
+
         form.search button {
             padding: 5px;
             font-size: 17px;
@@ -32,32 +32,22 @@
 </head>
 
 <body>
-    <div class="navbar">
-        <b>My Classified</b>
-        <a href="index.php" class="active">Home</a>
-        <a href="items.php">Items</a>
-        <div class="dropdown">
-            <button class="dropBtn" onclick="dropFunction()">Categories &#9662;</button>
-            <div class="dropdown-content" id="dropdown">
-                <a href="electronics.html">Electronics</a>
-                <a href="mens_fashion.html">Men's Fashion</a>
-                <a href="womens_fashion.html">Women's Fashion</a>
-                <a href="home_accessories.html">Home accessories</a>
-                <a href="books.html">Books</a>
-                <a href="toys.html">Toys</a>
-            </div>
-        </div>
-        <a href="search.php">Search</a>
-        <a href="login.php" style="float: right;"> <i class="fa fa-sign-in"></i> Log-in</a>
-    </div>
+    <?php
+    $index = '';
+    $items = '';
+    $category = '';
+    $search = 'class="active"';
+    require_once("_navbar.php");
+    ?>
+
     <div class="sideNav">
         <h2 style="color: rgb(65, 168, 175); text-align: center; font-size: 20px;">Categories</h2>
-        <a href="electronics.html">Electronics</a>
-        <a href="mens_fashion.html">Men's Fashion</a>
-        <a href="womens_fashion.html">Women's Fashion</a>
-        <a href="home_accessories.html">Home accessories</a>
-        <a href="books.html">Books</a>
-        <a href="toys.html" style="border-bottom: solid gray 1px;">Toys</a>
+        <a href="categories/books.php">Books</a>
+        <a href="categories/electronics.php">Electronics</a>
+        <a href="categories/halloween_items.php">Halloween Items</a>
+        <a href="categories/home_accessories.php">Home accessories</a>
+        <a href="categories/mens_fashion.php">Men's Fashion</a>
+        <a href="categories/womens_fashion.php" style="border-bottom: solid gray 1px;">Women's Fashion</a>
     </div>
 
     <div class="main">
