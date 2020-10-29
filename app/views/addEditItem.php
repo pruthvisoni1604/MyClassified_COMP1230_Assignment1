@@ -1,8 +1,7 @@
 <?php
-    $editItem=$_REQUEST['edit'] ?? '-1';
-    if($editItem!='-1'){
-        
-    }
+$editItem = $_REQUEST['edit'] ?? '-1';
+if ($editItem != '-1') {
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,9 +13,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creating a responsive website with the help of html,css and php">
     <meta name="keywords" content="">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/app/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="assets/js/script.js"></script>
+    <script src="/app/assets/js/script.js"></script>
 </head>
 <style>
     td {
@@ -34,17 +33,9 @@
 </style>
 
 <body>
-    <div class="navbar">
-        <b>My Classified</b>
-        <a href="index.php" class="active">Home</a>
-        <a href="items.php">Items</a>
-        <div class="dropdown">
-            <button class="dropBtn" onclick="dropFunction()">Categories </button>
-
-        </div>
-        <a href="search.php">Search</a>
-        <a href="login.php" style="float: right;"> <i class="fa fa-sign-in"></i> Log-in</a>
-    </div>
+    <?php
+    require_once("_navbar.php");
+    ?>
     <div class="sideNav">
         <h2 style="color: rgb(65, 168, 175); text-align: center; font-size: 20px;">Categories</h2>
         <a href="electronics.html">Electronics</a>
@@ -58,7 +49,7 @@
     <div class="main">
         <h2 style="color: rgb(65, 168, 175); text-align: center; font-size: 20px;">Add new item</h2>
         <table class="form">
-            <form action="upload.php" method="POST" enctype="multipart/form-data">
+            <form action="../models/upload.php" method="POST" enctype="multipart/form-data">
                 <tr>
                     <td>
                         <label for="title"> Title : </label>
@@ -75,12 +66,12 @@
                     <td>
                         <label for="categories">Categories :</label>
                         <select name="categories" id="categories">
-                            <option>Electronics</option>
-                            <option>Men's Fashion</option>
-                            <option>Women's Fashion</option>
-                            <option>Home Accessories</option>
-                            <option>Books</option>
-                            <option>Toys</option>
+                            <option value='0'>Books</option>
+                            <option value='1'>Electronics</option>
+                            <option value='2'>Halloween Items</option>
+                            <option value='3'>Home Accessories</option>
+                            <option value='4'>Men's Fashion</option>
+                            <option value='5'>Women's Fashion</option>
                         </select>
                     </td>
                 </tr>
@@ -93,7 +84,8 @@
                 <tr>
                     <td>
                         <label for="image">Image : </label>
-                        <input type="file" name="file"><br>
+                        <img id="output" width="200" />
+                        <input type="file" name="file" accept="image/*" onchange="loadFile(event)"><br>
                     </td>
                 </tr>
                 <tr>

@@ -15,10 +15,7 @@
 
 <body>
     <?php
-    $index = '';
-    $items = '';
     $category = 'active';
-    $search = '';
     require_once("../_navbar.php");
     ?>
     <div class="sideNav">
@@ -33,16 +30,19 @@
 
     <div class="main">
         <h2 style="color: rgb(65, 168, 175); font-size: 20px;">Women's fashion</h2>
-        <p>This sidebar is as tall as its content (the links), and is always shown.</p>
-        <p>Scroll down the page to see the result.</p>
-        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint
-            efficiantur his ad. Eum no molestiae voluptatibus.</p>
-        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint
-            efficiantur his ad. Eum no molestiae voluptatibus.</p>
-        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint
-            efficiantur his ad. Eum no molestiae voluptatibus.</p>
-        <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint
-            efficiantur his ad. Eum no molestiae voluptatibus.</p>
+        <?php
+        $count = 0;
+        for ($i = 0; $i < sizeof(file('../../itemDetails.txt')); $i++) {
+            $item_info = explode(':', file('../../itemDetails.txt')[$i]);
+            if ($item_info[2] == '5') {
+                include('../_item.php');
+                $count = 1;
+            }
+        }
+        if ($count == 0) {
+            echo 'There is no Records to show.';
+        }
+        ?>
     </div>
 </body>
 

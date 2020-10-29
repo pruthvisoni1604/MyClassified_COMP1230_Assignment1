@@ -8,12 +8,12 @@ if (isset($_POST['submit'])) {
     $imageName = $category . "_" . $title . "_" . $price;
 
     if (imageUpload($imageName)) {
-        $file = fopen("itemDetails.txt", "a") or die("Unable to open file!");
+        $file = fopen("../itemDetails.txt", "a") or die("Unable to open file!");
         $imageName=$imageName . "." . strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
         $txt = "$title:$description:$category:$price:$imageName\n";
         fwrite($file, $txt);
         fclose($file);
-        header("location : index.php");
+        header("location: ../views/items.php");
     }
 }
 function imageUpload($fileNameToBe)
@@ -21,7 +21,7 @@ function imageUpload($fileNameToBe)
     $fileName = $_FILES['file']['name'];
     $uploadOk = true;
     $imageFileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-    $target_file = "assets/img/" . $fileNameToBe . "." . $imageFileType;
+    $target_file = "..\assets\img\\" . $fileNameToBe . "." . $imageFileType;
     $fileTmpName = $_FILES['file']['tmp_name'];
     $fileSize = $_FILES['file']['size'];
 

@@ -33,9 +33,6 @@
 
 <body>
     <?php
-    $index = '';
-    $items = '';
-    $category = '';
     $search = 'class="active"';
     require_once("_navbar.php");
     ?>

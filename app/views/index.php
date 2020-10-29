@@ -17,9 +17,6 @@
 <body>
     <?php
     $index = 'class="active"';
-    $items = '';
-    $category = '';
-    $search = '';
     require_once("_navbar.php");
     ?>
     <div class="mainDiv">

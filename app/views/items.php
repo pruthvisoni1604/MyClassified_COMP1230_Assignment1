@@ -15,10 +15,7 @@
 
 <body>
     <?php
-    $index = '';
     $items = 'class="active"';
-    $category = '';
-    $search = '';
     require_once("_navbar.php");
     ?>
     <div class="sideNav">
@@ -37,45 +34,18 @@
         <p>Scroll down the page to see the result.</p>
         <div class="main">
             <h2 style="color: rgb(65, 168, 175); font-size: 20px;">Items</h2>
-            <!--<?php
-            for ($i = 0; $i < sizeof(file('itemDetails.txt')); $i++) {
-                $item_info = explode(':', file('itemDetails.txt')[$i]);
-                item($item_info, $i);
+            <?php
+            $count=0;
+            for ($i = 0; $i < sizeof(file('../itemDetails.txt')); $i++) {
+                $item_info = explode(':', file('../itemDetails.txt')[$i]);
+                include('_item.php');
+                $count=1;
             }
-            ?>-->
+            if($count==0){
+                echo 'There is no Records to show.';
+            }
+            ?>
         </div>
-        <?php
-        function item($item_info, $numberOfItem)
-        {
-            echo '
-                <div>
-                    <div class="image">
-                        <img src="assets/img/' . $item_info[4] . '" alt="No No_Image_Available" width="300px">
-                    </div>  
-                    <div class="itemMargin">
-                        <h2>' . $item_info[0] . '</h2>
-                    </div>
-                    <div class="itemMargin">
-                        <p>
-                            ' . $item_info[2] . '
-                        </p>
-                    </div>
-                    <div class="itemMargin">
-                        <p><i class="fa fa-shopping-cart" aria-hidden="true"></i> Price : $' . $item_info[3] . '</p>
-                    </div>
-                    <div class="itemButtons">
-                        <button class="itemModifyBtn" onclick="window.location.href=\'addItem.php?edit=' . $numberOfItem . '\';">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                            Modify
-                        </button>
-                        <button class="itemDeleteBtn">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                            delete
-                        </button>
-                    </div>      
-                </div>';
-        }
-        ?>
     </div>
 </body>
 
