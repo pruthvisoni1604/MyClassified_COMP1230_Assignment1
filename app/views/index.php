@@ -16,18 +16,33 @@
 
 <body>
     <?php
+    session_start();
     $index = 'class="active"';
-    require_once("_navbar.php");
+    if (isset($_SESSION['user_logged_in'])) {
+        require_once("_navbarAdmin.php");
+    } else
+        require_once("_navbar.php");
     ?>
     <div class="mainDiv">
         <div class="subDiv">
-            <p style="font-size: 60px; margin: 0;">Hello, Welcome to My Classified</p>
-            <p>This is our first assignment of advanced web programming and this website is created by Pruthvi, Sahay and Namya. It is a dummy model of online retailer website where people can buy things from the website </p>
-            <button id="mainButton" onclick="items.php">
-                <div id="btnMargin">
-                    View Our Items <i class="fa fa-angle-double-right"></i>
-                </div>
-            </button>
+            <?php if (isset($_SESSION['user_logged_in'])) {
+            ?>
+                <ul>
+                    <li>
+                        Items
+                    </li>
+                    <li>Categories</li>
+                </ul>
+            <?php
+            } else {
+            ?>
+                <p style="font-size: 60px; margin: 0;">Hello, Welcome to My Classified</p>
+                <p>This is our first assignment of advanced web programming and this website is created by Pruthvi, Sahay and Namya. It is a dummy model of online retailer website where people can buy things from the website </p>
+                <button id="mainButton" onclick="window.location.href='items.php'">
+                    <div id="btnMargin">
+                        View Our Items <i class="fa fa-angle-double-right"></i>
+                    </div>
+                </button><?php } ?>
         </div>
     </div>
 

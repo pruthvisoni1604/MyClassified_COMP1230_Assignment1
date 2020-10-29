@@ -3,7 +3,8 @@ session_start();
 include '../controllers/profile.php';
 
 checkAdminDetails();
-$isLoggedIn = check_access(true);
+if(check_access(false))
+include '../models/logout.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +29,10 @@ $isLoggedIn = check_access(true);
 
 <body>
     <?php
-    require_once("_navbar.php");
+    if (isset($_SESSION['user_logged_in'])) {
+        require_once("_navbarAdmin.php");
+    } else
+        require_once("_navbar.php");
     ?>
     <div class="login">
         <form action="">

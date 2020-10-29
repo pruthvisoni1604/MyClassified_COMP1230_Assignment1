@@ -14,5 +14,5 @@
             </div>
         </div>
         <a href="/app/views/search.php"  <?=$search ?? ''?>>Search</a>
-        <a href="/app/views/login.php" style="float: right;"> <i class="fa fa-sign-in"></i> Log-in</a>
+        <a href="/app/views/login.php" style="float: right;"> <i class="fa fa-sign-in"></i><?php echo isset($_SESSION["user_logged_in"])?" Log Out":" Login" ?></a>
     </div>

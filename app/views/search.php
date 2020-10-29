@@ -1,3 +1,10 @@
+<?php
+session_start();
+include '../controllers/profile.php';
+
+$searchItem = get('search') ?? '';
+$count = 0;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +41,10 @@
 <body>
     <?php
     $search = 'class="active"';
-    require_once("_navbar.php");
+    if (isset($_SESSION['user_logged_in'])) {
+        require_once("_navbarAdmin.php");
+    } else
+        require_once("_navbar.php");
     ?>
 
     <div class="sideNav">
@@ -50,11 +60,23 @@
     <div class="main">
         <h2 style="color: rgb(65, 168, 175); font-size: 20px;">Search for </h2>
         <div style="float: right;">
-            <form class="search " action="/action_page.php" style="max-width: 200px;">
+            <form class="search" action="" style="max-width: 200px;">
                 <input type="text" name="search">
                 <button type="submit">Search</button>
             </form>
         </div>
+        <?php
+        for ($i = 0; $i < sizeof(file('../itemDetails.txt')); $i++) {
+            $item_info = explode(':', file('../itemDetails.txt')[$i]);
+            if ($searchItem == $item_info[0]) {
+                include('_item.php');
+                $count = 1;
+            }
+        }
+        if ($count == 0) {
+            echo 'There is no Records to show.';
+        }
+        ?>
     </div>
 </body>
 

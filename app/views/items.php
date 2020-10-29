@@ -15,8 +15,12 @@
 
 <body>
     <?php
+    session_start();
     $items = 'class="active"';
-    require_once("_navbar.php");
+    if (isset($_SESSION['user_logged_in'])) {
+        require_once("_navbarAdmin.php");
+    } else
+        require_once("_navbar.php");
     ?>
     <div class="sideNav">
         <h2 style="color: rgb(65, 168, 175); text-align: center; font-size: 20px;">Categories</h2>
@@ -30,10 +34,6 @@
 
     <div class="main">
         <h2 style="color: rgb(65, 168, 175); font-size: 20px;">Items</h2>
-        <p>This sidebar is as tall as its content (the links), and is always shown.</p>
-        <p>Scroll down the page to see the result.</p>
-        <div class="main">
-            <h2 style="color: rgb(65, 168, 175); font-size: 20px;">Items</h2>
             <?php
             $count=0;
             for ($i = 0; $i < sizeof(file('../itemDetails.txt')); $i++) {

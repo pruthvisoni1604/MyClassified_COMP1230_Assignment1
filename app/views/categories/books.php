@@ -17,6 +17,7 @@
 <body>
     <?php
     $category = 'active';
+    session_start();
     require_once("../_navbar.php");
     ?>
     <div class="sideNav">
