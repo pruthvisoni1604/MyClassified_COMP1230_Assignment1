@@ -1,3 +1,9 @@
+<?php
+session_start();
+include '../controllers/profile.php';
+check_access(true);
+$category = 'class="active"';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,10 +21,6 @@
 
 <body>
     <?php
-    session_start();
-    include '../controllers/profile.php';
-    check_access(true);
-    $category = 'class="active"';
     require_once("_navbarAdmin.php");
     ?>
 

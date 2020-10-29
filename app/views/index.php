@@ -1,3 +1,7 @@
+<?php
+session_start();
+$index = 'class="active"';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,9 +20,8 @@
 
 <body>
     <?php
-    session_start();
-    $index = 'class="active"';
-    if (isset($_SESSION['user_logged_in'])) {
+
+    if (isset($_SESSION["user_logged_in"])) {
         require_once("_navbarAdmin.php");
     } else
         require_once("_navbar.php");
@@ -36,7 +39,7 @@
             <?php
             } else {
             ?>
-                <p style="font-size: 60px; margin: 0;">Hello, Welcome to My Classified</p>
+                <p style="font-size: 60px; margin: 0;">Hello, Welcome to My Classified bitch</p>
                 <p>This is our first assignment of advanced web programming and this website is created by Pruthvi, Sahay and Namya. It is a dummy model of online retailer website where people can buy things from the website </p>
                 <button id="mainButton" onclick="window.location.href='items.php'">
                     <div id="btnMargin">

@@ -29,9 +29,6 @@ include '../models/logout.php';
 
 <body>
     <?php
-    if (isset($_SESSION['user_logged_in'])) {
-        require_once("_navbarAdmin.php");
-    } else
         require_once("_navbar.php");
     ?>
     <div class="login">

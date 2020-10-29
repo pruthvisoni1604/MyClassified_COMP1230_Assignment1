@@ -1,3 +1,7 @@
+<?php 
+session_start();
+$items = 'class="active"';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,8 +19,6 @@
 
 <body>
     <?php
-    session_start();
-    $items = 'class="active"';
     if (isset($_SESSION['user_logged_in'])) {
         require_once("_navbarAdmin.php");
     } else

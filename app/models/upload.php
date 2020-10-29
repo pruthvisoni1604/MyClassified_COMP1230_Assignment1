@@ -21,7 +21,7 @@ function imageUpload($fileNameToBe)
     $fileName = $_FILES['file']['name'];
     $uploadOk = true;
     $imageFileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-    $target_file = "..\assets\img\\" . $fileNameToBe . "." . $imageFileType;
+    $target_file = "../assets/img/" . $fileNameToBe . "." . $imageFileType;
     $fileTmpName = $_FILES['file']['tmp_name'];
     $fileSize = $_FILES['file']['size'];
 

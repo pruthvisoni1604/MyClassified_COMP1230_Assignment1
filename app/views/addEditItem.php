@@ -1,4 +1,8 @@
 <?php
+session_start();
+include '../controllers/profile.php';
+check_access(true);
+$items = 'class="active"';
 $editItem = $_REQUEST['edit'] ?? '-1';
 if ($editItem != '-1') {
     $item_info = explode(':', file('../itemDetails.txt')[$editItem]);
@@ -35,10 +39,6 @@ if ($editItem != '-1') {
 
 <body>
     <?php
-    session_start();
-    include '../controllers/profile.php';
-    check_access(true);
-    $items = 'class="active"';
     require_once("_navbarAdmin.php");
     ?>
     <div class="sideNav">
@@ -58,13 +58,13 @@ if ($editItem != '-1') {
                 <tr>
                     <td>
                         <label for="title"> Title : </label>
-                        <input type="text" name="title" placeholder="Enter Title" style="width : 600px" value="<?=$item_info[0]?>">
+                        <input type="text" name="title" placeholder="Enter Title" style="width : 600px" value="<?=$item_info[0]?? ''?>">
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label for="description"> Description :</label>
-                        <textarea type="text" name="description" value="<?=$item_info[1]?>"></textarea>
+                        <textarea type="text" name="description" value="<?=$item_info[1]?? ''?>"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -83,7 +83,7 @@ if ($editItem != '-1') {
                 <tr>
                     <td>
                         <label for="price">Price :</label>
-                        <input type="number" name="price" placeholder="Enter Price" value="<?=$item_info[3]?>">
+                        <input type="number" name="price" placeholder="Enter Price" value="<?=$item_info[3]?? ''?>">
                     </td>
                 </tr>
                 <tr>
