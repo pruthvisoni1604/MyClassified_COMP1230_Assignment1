@@ -6,10 +6,9 @@ $category = 'class="active"';
 $editItem = $_REQUEST['edit'] ?? '-1';
 $edit=false;
 if ($editItem != '-1') {
-    $item_info = explode(':', file('../itemDetails.txt')[$editItem]);
-    $item_info[1]=str_replace("<br/>","\r\n",$item_info[1]);
+    $category_info = explode(':', file('../categoryDetails.txt')[$editItem]);
+    $category_info[1]=str_replace("<br/>","\r\n",$category_info[1]);
     $edit=true;
-    $_GET['edit']=$editItem;
 }
 ?>
 <!DOCTYPE html>
@@ -53,13 +52,13 @@ if ($editItem != '-1') {
                 <tr>
                     <td>
                         <label for="title"> Title : </label>
-                        <input type="text" name="title" placeholder="Enter Title" style="width : 600px" value="<?=$item_info[0]?? ''?>">
+                        <input type="text" name="title" placeholder="Enter Title" style="width : 600px" value="<?=$category_info[0]?? ''?>">
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label for="description"> Description :</label>
-                        <textarea type="text" name="description" ><?=$item_info[1]?? ''?></textarea>
+                        <textarea type="text" name="description" ><?=$category_info[1]?? ''?></textarea>
                     </td>
                 </tr>
                 <tr>
