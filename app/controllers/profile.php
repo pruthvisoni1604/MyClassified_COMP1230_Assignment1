@@ -7,7 +7,7 @@ function checkAdminDetails(){
         $user_info = explode(':', file('../adminDetails.txt')[$i]);
         if ($user_info[0] == get('username') && trim($user_info[1]) == md5(get('password'))) {
             $_SESSION["user_logged_in"] = true;
-            header('Location: index.php?ui="ui"');
+            header('Location: index.php?');
             exit();
         }
     }

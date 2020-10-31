@@ -39,7 +39,7 @@ $index = 'class="active"';
             <?php
             } else {
             ?>
-                <p style="font-size: 60px; margin: 0;">Hello, Welcome to My Classified bitch</p>
+                <p style="font-size: 60px; margin: 0;">Hello, Welcome to My Classified</p>
                 <p>This is our first assignment of advanced web programming and this website is created by Pruthvi, Sahay and Namya. It is a dummy model of online retailer website where people can buy things from the website </p>
                 <button id="mainButton" onclick="window.location.href='items.php'">
                     <div id="btnMargin">

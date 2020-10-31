@@ -6,6 +6,8 @@ $items = 'class="active"';
 $editItem = $_REQUEST['edit'] ?? '-1';
 if ($editItem != '-1') {
     $item_info = explode(':', file('../itemDetails.txt')[$editItem]);
+    $item_info[1]=str_replace("<br/>","\r\n",$item_info[1]);
+
 }
 ?>
 <!DOCTYPE html>
@@ -64,7 +66,7 @@ if ($editItem != '-1') {
                 <tr>
                     <td>
                         <label for="description"> Description :</label>
-                        <textarea type="text" name="description" value="<?=$item_info[1]?? ''?>"></textarea>
+                        <textarea type="text" name="description"><?=$item_info[1]?? ''?></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -73,7 +75,7 @@ if ($editItem != '-1') {
                         <select name="categories" id="categories"  value='3'>
                             <option value='0'>Books</option>
                             <option value='1'>Electronics</option>
-                            <option value='2'>Halloween Items</option>
+                            <option value='2'  selected="selected">Halloween Items</option>
                             <option value='3'>Home Accessories</option>
                             <option value='4'>Men's Fashion</option>
                             <option value='5'>Women's Fashion</option>
