@@ -108,10 +108,9 @@ b {
     text-decoration: none;
     color: rgb(65, 168, 175);
     display: block;
-    border-right: solid gray 1px;
-    border-left: solid gray 1px;
-    border-top: solid gray 1px;
+    border: solid gray 1px;
     padding: 15px;
+    border-collapse: collapse;
 }
 
 .sideNav a:hover {

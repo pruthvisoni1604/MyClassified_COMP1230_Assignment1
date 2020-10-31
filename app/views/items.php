@@ -23,7 +23,7 @@ $items = 'class="active"';
         require_once("_navbarAdmin.php");
     } else
         require_once("_navbar.php");
-    require_once("_sidenavbar.php");
+    require_once("_sidenav.php");
     ?>
 
 
