@@ -16,10 +16,11 @@ if (isset($_POST['submit'])) {
                 $item_info = explode(":", $fileContent[$i]);
                 $category = $item_info[2];
                 if ($fileName == "") {
-                    $txt = "$title:$description:$category:$price:$item_info[4]\n";
+                    $txt = "$title:$description:$category:$price:$item_info[4]";
                 } else {
-                    if (imageUpload($imageName)) {
-                        $txt = "$title:$description:$category:$price:$imageName\n";
+                    $imageName = $category . "_" . $title . "_" . $price;
+                    if (imageUpload($imageName, false)) {
+                        $txt = "$title:$description:$category:$price:$imageName" . "." . strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION)) . "\n";
                     }
                 }
             } else {
@@ -28,21 +29,22 @@ if (isset($_POST['submit'])) {
             fwrite($file, $txt);
         }
         header("location: ../views/displayCategory.php?id=$category");
-    }
-    if (imageUpload($imageName)) {
-        $file = fopen("../itemDetails.txt", "a") or die("Unable to open file!");
-        if ($_FILES['file']['name'] == "") {
-            $imageName = "No_Image_Available.png";
-        } else {
-            $imageName = $imageName . "." . strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
+    } else {
+        if (imageUpload($imageName, true)) {
+            $file = fopen("../itemDetails.txt", "a") or die("Unable to open file!");
+            if ($_FILES['file']['name'] == "") {
+                $imageName = "No_Image_Available.png";
+            } else {
+                $imageName = $imageName . "." . strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
+            }
+            $txt = "$title:$description:$category:$price:$imageName\n";
+            fwrite($file, $txt);
+            fclose($file);
+            header("location: ../views/items.php");
         }
-        $txt = "$title:$description:$category:$price:$imageName\n";
-        fwrite($file, $txt);
-        fclose($file);
-        header("location: ../views/items.php");
     }
 }
-function imageUpload($fileNameToBe)
+function imageUpload($fileNameToBe, $checkSameName)
 {
     $fileName = $_FILES['file']['name'];
     echo $fileName;
@@ -64,7 +66,7 @@ function imageUpload($fileNameToBe)
         echo " Your file is too big! Try uploading a smaller file.";
         $uploadOk = false;
     }
-    if (file_exists($target_file)) {
+    if (file_exists($target_file) && $checkSameName) {
         echo "Sorry, file already exists.";
         $uploadOk = false;
     }
