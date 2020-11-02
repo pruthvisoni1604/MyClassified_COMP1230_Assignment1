@@ -4,10 +4,11 @@ include '../controllers/profile.php';
 check_access(true);
 $items = 'class="active"';
 $editItem = $_REQUEST['edit'] ?? '-1';
+$edit = false;
 if ($editItem != '-1') {
     $item_info = explode(':', file('../itemDetails.txt')[$editItem]);
-    $item_info[1]=str_replace("<br/>","\r\n",$item_info[1]);
-
+    $item_info[1] = str_replace("<br/>", "\r\n", $item_info[1]);
+    $edit = true;
 }
 ?>
 <!DOCTYPE html>
@@ -42,57 +43,55 @@ if ($editItem != '-1') {
 <body>
     <?php
     require_once("_navbarAdmin.php");
+    require_once("_sidenav.php");
     ?>
-    <div class="sideNav">
-        <h2 style="color: rgb(65, 168, 175); text-align: center; font-size: 20px;">Categories</h2>
-        <a href="electronics.html">Electronics</a>
-        <a href="mens_fashion.html">Men's Fashion</a>
-        <a href="womens_fashion.html">Women's Fashion</a>
-        <a href="home_accessories.html">Home accessories</a>
-        <a href="books.html">Books</a>
-        <a href="toys.html" style="border-bottom: solid gray 1px;">Toys</a>
-    </div>
-
     <div class="main">
         <h2 style="color: rgb(65, 168, 175); text-align: center; font-size: 20px;">Add new item</h2>
         <table class="form">
-            <form action="../models/upload.php" method="POST" enctype="multipart/form-data">
+            <form action="../models/upload.php<?php echo $edit?"?edit=$editItem":"";?>" method="POST" enctype="multipart/form-data">
                 <tr>
                     <td>
                         <label for="title"> Title : </label>
-                        <input type="text" name="title" placeholder="Enter Title" style="width : 600px" value="<?=$item_info[0]?? ''?>">
+                        <input type="text" name="title" placeholder="Enter Title" style="width : 600px" value="<?= $item_info[0] ?? '' ?>" required>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label for="description"> Description :</label>
-                        <textarea type="text" name="description"><?=$item_info[1]?? ''?></textarea>
+                        <textarea type="text" name="description" required><?= $item_info[1] ?? '' ?></textarea>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <label for="categories">Categories :</label>
-                        <select name="categories" id="categories"  value='3'>
-                            <option value='0'>Books</option>
-                            <option value='1'>Electronics</option>
-                            <option value='2'  selected="selected">Halloween Items</option>
-                            <option value='3'>Home Accessories</option>
-                            <option value='4'>Men's Fashion</option>
-                            <option value='5'>Women's Fashion</option>
-                        </select>
-                    </td>
-                </tr>
+                <?php
+                if (!$edit) {
+                ?>
+                    <tr>
+                        <td>
+                            <label for="categories">Categories :</label>
+                            <select name="categories" id="categories" required>
+                                <?php
+                                for ($i = 0; $i < sizeof($category_details); $i++) {
+                                    echo "<option value='$i'>" . $category_details[$i][0] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
                 <tr>
                     <td>
                         <label for="price">Price :</label>
-                        <input type="number" name="price" placeholder="Enter Price" value="<?=$item_info[3]?? ''?>">
+                        <input type="number" name="price" placeholder="Enter Price" value="<?= $item_info[3] ?? '' ?>" required>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label for="image">Image : </label>
-                        <img id="output" width="200" />
-                        <input type="file" name="file" accept="image/*" onchange="loadFile(event)" value="<?=$item_info[4]?>"><br>
+                        <img id="output" width="200" src="../assets/img/<?= $item_info[4] ?? "" ?>" />
+                        <input type="file" name="file" id="img" accept="image/*" onchange="loadFile(event)" style="display:none;" />
+                        <label for="img" class="itemModifyBtn">Click me to upload image</label>
+
                     </td>
                 </tr>
                 <tr>

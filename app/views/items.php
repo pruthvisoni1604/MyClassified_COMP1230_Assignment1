@@ -29,6 +29,11 @@ $items = 'class="active"';
 
     <div class="main">
         <h2 style="color: rgb(65, 168, 175); font-size: 20px;">Items</h2>
+        <button id="mainButton" onclick="window.location.href='addEditItem.php'" style="float: right;">
+                <div id="btnMargin">
+                    + Add New Item
+                </div>
+            </button>
         <?php
         $count = 0;
         for ($i = 0; $i < sizeof(file('../itemDetails.txt')); $i++) {

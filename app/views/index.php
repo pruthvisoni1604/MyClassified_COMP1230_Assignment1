@@ -1,6 +1,7 @@
 <?php
 session_start();
 $index = 'class="active"';
+include("../controllers/profile.php")
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,10 +32,8 @@ $index = 'class="active"';
             <?php if (isset($_SESSION['user_logged_in'])) {
             ?>
                 <ul>
-                    <li>
-                        Items
-                    </li>
-                    <li>Categories</li>
+                    <li><i class="fa fa-th-large" aria-hidden="true"></i> # Items</li>
+                    <li><i class="fa fa-list-ul" aria-hidden="true"></i> # Categories</li>
                 </ul>
             <?php
             } else {

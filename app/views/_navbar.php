@@ -5,12 +5,11 @@
         <div class="dropdown <?=$category ?? ''?>">
             <button class="dropBtn" onclick="dropFunction()">Categories &#9662;</button>
             <div class="dropdown-content" id="dropdown">
-                <a href="/app/views/categories/books.php">Books</a>
-                <a href="/app/views/categories/electronics.php">Electronics</a>
-                <a href="/app/views/categories/halloween_items.php">Halloween Items</a>
-                <a href="/app/views/categories/home_accessories.php">Home accessories</a>
-                <a href="/app/views/categories/mens_fashion.php">Men's Fashion</a>
-                <a href="/app/views/categories/womens_fashion.php">Women's Fashion</a>
+                <?php
+                    for($i=0;$i<sizeof($category_details);$i++){
+                        echo "<a href=\"/app/views/displayCategory.php?id=$i\">".$category_details[$i][0]."</a>";
+                    }
+                ?>
             </div>
         </div>
         <a href="/app/views/search.php"  <?=$search ?? ''?>>Search</a>

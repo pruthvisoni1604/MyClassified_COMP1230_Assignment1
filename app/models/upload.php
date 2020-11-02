@@ -3,13 +3,39 @@
 if (isset($_POST['submit'])) {
     $title = $_REQUEST['title'];
     $description = preg_replace("/\r\n|\r|\n/", '<br/>', $_REQUEST['description']);
-    $category = $_REQUEST['categories'];
+    $category = $_REQUEST['categories'] ?? "";
     $price = $_REQUEST['price'];
     $imageName = $category . "_" . $title . "_" . $price;
-
+    $editItem = $_REQUEST['edit'] ?? -1;
+    if ($editItem != -1) {
+        $fileName = $_FILES['file']['name'];
+        $fileContent = file("../itemDetails.txt");
+        $file = fopen("../itemDetails.txt", "w") or die("Unable to open file!");
+        for ($i = 0; $i < sizeof($fileContent); $i++) {
+            if ($editItem == $i) {
+                $item_info = explode(":", $fileContent[$i]);
+                $category = $item_info[2];
+                if ($fileName == "") {
+                    $txt = "$title:$description:$category:$price:$item_info[4]\n";
+                } else {
+                    if (imageUpload($imageName)) {
+                        $txt = "$title:$description:$category:$price:$imageName\n";
+                    }
+                }
+            } else {
+                $txt = $fileContent[$i];
+            }
+            fwrite($file, $txt);
+        }
+        header("location: ../views/displayCategory.php?id=$category");
+    }
     if (imageUpload($imageName)) {
         $file = fopen("../itemDetails.txt", "a") or die("Unable to open file!");
-        $imageName=$imageName . "." . strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
+        if ($_FILES['file']['name'] == "") {
+            $imageName = "No_Image_Available.png";
+        } else {
+            $imageName = $imageName . "." . strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
+        }
         $txt = "$title:$description:$category:$price:$imageName\n";
         fwrite($file, $txt);
         fclose($file);
@@ -19,14 +45,17 @@ if (isset($_POST['submit'])) {
 function imageUpload($fileNameToBe)
 {
     $fileName = $_FILES['file']['name'];
+    echo $fileName;
     $uploadOk = true;
     $imageFileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
     $target_file = "../assets/img/" . $fileNameToBe . "." . $imageFileType;
     $fileTmpName = $_FILES['file']['tmp_name'];
     $fileSize = $_FILES['file']['size'];
-
     $allow = array('jpg', 'jpeg', 'png', 'gif');
 
+    if ($fileName == "" && $fileSize == 0) {
+        return true;
+    }
     if (!in_array($imageFileType, $allow)) {
         echo " You can not upload files of $imageFileType type! <br>Try uploading files of jpg, jpeg, png, pdf.";
         $uploadOk = false;

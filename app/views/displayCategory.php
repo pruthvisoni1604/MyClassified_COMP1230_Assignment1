@@ -1,5 +1,7 @@
 <?php
 session_start();
+$count = 0;
+$id = $_REQUEST['id'] ?? -1;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +20,7 @@ session_start();
 </head>
 
 <body>
-<?php
+    <?php
     if (isset($_SESSION['user_logged_in'])) {
         require_once("_navbarAdmin.php");
     } else
@@ -26,16 +28,24 @@ session_start();
     require_once("_sidenav.php");
     ?>
     <div class="main">
-        <h2 style="color: rgb(65, 168, 175); font-size: 20px;">Books</h2>
+        <h2 style="color: rgb(65, 168, 175); font-size: 20px;">ujyhtgrfedwskjuyhgtfrde</h2>
+        <button id="mainButton" onclick="window.location.href='addEditCategory.php'" style="float: right;">
+            <div id="btnMargin">
+                + Add New Item
+            </div>
+        </button>
         <?php
-        $count = 0;
-        $id=$_REQUEST['id']?? -1;
-        for ($i = 0; $i < sizeof(file('../itemDetails.txt')); $i++) {
-            $item_info = explode(':', file('../itemDetails.txt')[$i]);
-            if ($item_info[2] == $id) {
-                include('_item.php');
-                $count = 1;
+        if ($id != -1) {
+            for ($i = 0; $i < sizeof(file('../itemDetails.txt')); $i++) {
+                $item_info = explode(':', file('../itemDetails.txt')[$i]);
+                if ($item_info[2] == $id) {
+                    include('_item.php');
+                    $count = 1;
+                }
             }
+        }
+        else{
+            echo "No content to show!";
         }
         if ($count == 0) {
             echo 'There is no Records to show.';
