@@ -52,13 +52,13 @@ if ($editItem != '-1') {
                 <tr>
                     <td>
                         <label for="title"> Title : </label>
-                        <input type="text" name="title" placeholder="Enter Title" style="width : 600px" value="<?=$category_info[0]?? ''?>">
+                        <input type="text" name="title" placeholder="Enter Title" style="width : 600px" value="<?=$category_info[0]?? ''?>" required>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label for="description"> Description :</label>
-                        <textarea type="text" name="description" ><?=$category_info[1]?? ''?></textarea>
+                        <textarea type="text" name="description" required><?=$category_info[1]?? ''?></textarea>
                     </td>
                 </tr>
                 <tr>

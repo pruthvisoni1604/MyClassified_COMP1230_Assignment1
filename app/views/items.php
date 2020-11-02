@@ -13,6 +13,7 @@ $items = 'class="active"';
     <meta name="description" content="Creating a responsive website with the help of html,css and php">
     <meta name="keywords" content="">
     <link rel="stylesheet" href="/app/assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/app/assets/js/script.js"></script>
 </head>
@@ -30,10 +31,10 @@ $items = 'class="active"';
     <div class="main">
         <h2 style="color: rgb(65, 168, 175); font-size: 20px;">Items</h2>
         <button id="mainButton" onclick="window.location.href='addEditItem.php'" style="float: right;">
-                <div id="btnMargin">
-                    + Add New Item
-                </div>
-            </button>
+            <div id="btnMargin">
+                + Add New Item
+            </div>
+        </button>
         <?php
         $count = 0;
         for ($i = 0; $i < sizeof(file('../itemDetails.txt')); $i++) {
@@ -45,8 +46,15 @@ $items = 'class="active"';
             echo 'There is no Records to show.';
         }
         ?>
+        <script>
+            function showAlert(id){
+                if (confirm("You Sure you want to delete that item?") == true) {
+                    window.location.href = "../models/deleteItem.php?id="+id;
+                }
+            }
+        </script>
     </div>
-    </div>
+
 </body>
 
 <footer>

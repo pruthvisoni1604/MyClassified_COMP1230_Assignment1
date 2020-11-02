@@ -3,6 +3,7 @@
 if (isset($_POST['submit'])) {
     $title = $_REQUEST['title'];
     $description = preg_replace("/\r\n|\r|\n/", '<br/>', $_REQUEST['description']);
+    $description=str_replace(":"," ",$description);
     $category = $_REQUEST['categories'] ?? "";
     $price = $_REQUEST['price'];
     $imageName = $category . "_" . $title . "_" . $price;

@@ -9,7 +9,7 @@
         <p><?= $item_info[1] ?></p>
     </div>
     <div class="itemMargin">
-        <p><i class="fa fa-shopping-cart" aria-hidden="true"></i> Price : $<?= $item_info[3] ?></p>
+        <p><i class="fa fa-shopping-cart" aria-hidden="true"></i> Price : $<?php echo $item_info[3]==0?" Free":$item_info[3] ?></p>
     </div>
     <?php
     if (isset($_SESSION["user_logged_in"])) {
@@ -19,7 +19,7 @@
                 <i class="fa fa-pencil" aria-hidden="true"></i>
                 Modify
             </button>
-            <button class="itemDeleteBtn">
+            <button class="itemDeleteBtn" onclick="showAlert(<?=$i?>)">
                 <i class="fa fa-trash" aria-hidden="true"></i>
                 delete
             </button>
