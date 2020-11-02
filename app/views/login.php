@@ -3,8 +3,8 @@ session_start();
 include '../controllers/profile.php';
 
 checkAdminDetails();
-if(check_access(false))
-include '../models/logout.php';
+if (check_access(false))
+    logout();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,25 +19,19 @@ include '../models/logout.php';
     <link rel="stylesheet" href="/app/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/app/assets/js/script.js"></script>
-    <style>
-        .login {
-            text-align: center;
-            display: block;
-        }
-    </style>
 </head>
 
 <body>
     <?php
-        require_once("_navbar.php");
+    require_once("_navbar.php");
     ?>
     <div class="login">
-        <form action="">
+        <form method="post">
             <label for="username">Username</label>
-            <input type="text" for="username" name="username" placeholder="username" required>
+            <input type="text" for="username" name="username" placeholder="username" value="admin" required>
 
             <label for="password">Password</label>
-            <input type="password" for="password" name="password" placeholder="password" required>
+            <input type="password" for="password" name="password" placeholder="password" value="admin" required>
 
             <button type="submit">Login</button>
             <label>
@@ -46,4 +40,5 @@ include '../models/logout.php';
         </form>
     </div>
 </body>
+
 </html>

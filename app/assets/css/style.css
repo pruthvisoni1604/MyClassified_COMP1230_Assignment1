@@ -124,6 +124,68 @@ b {
     padding: 0px 10px;
 }
 
+.categoryTable {
+    width: 100%
+}
+
+.categoryTable td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+.title {
+    color: rgb(65, 168, 175);
+    font-size: 20px;
+}
+
+.noSideNav {
+    padding: 20px;
+}
+
+.floatRight {
+    float: right
+}
+
+form .search {
+    max-width: 200px;
+}
+
+form.search input[type=text] {
+    padding: 5px;
+    font-size: 17px;
+    border: 1px solid grey;
+    width: 80%;
+    background: #f1f1f1;
+    border-radius: 15px;
+}
+
+form.search button {
+    padding: 5px;
+    font-size: 17px;
+    border: 1px solid grey;
+    width: auto;
+    background: #f1f1f1;
+}
+
+.login {
+    text-align: center;
+    display: block;
+}
+
+.form td {
+    padding: 10px;
+}
+
+.form label {
+    margin-right: 40px;
+}
+
+.form textarea {
+    width: 600px;
+    height: 100px;
+}
+
 @media screen and (max-height: 450px) {
     .sideNav {
         padding-top: 15px;

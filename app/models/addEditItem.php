@@ -3,11 +3,13 @@
 if (isset($_POST['submit'])) {
     $title = $_REQUEST['title'];
     $description = preg_replace("/\r\n|\r|\n/", '<br/>', $_REQUEST['description']);
-    $description=str_replace(":"," ",$description);
+    $description = str_replace(":", " ", $description);
     $category = $_REQUEST['categories'] ?? "";
     $price = $_REQUEST['price'];
     $imageName = $category . "_" . $title . "_" . $price;
+
     $editItem = $_REQUEST['edit'] ?? -1;
+
     if ($editItem != -1) {
         $fileName = $_FILES['file']['name'];
         $fileContent = file("../itemDetails.txt");
@@ -57,6 +59,7 @@ function imageUpload($fileNameToBe, $checkSameName)
     $allow = array('jpg', 'jpeg', 'png', 'gif');
 
     if ($fileName == "" && $fileSize == 0) {
+        //returning true because uploading file is not required and this block will execute if no image was uploaded.
         return true;
     }
     if (!in_array($imageFileType, $allow)) {
@@ -72,13 +75,13 @@ function imageUpload($fileNameToBe, $checkSameName)
         $uploadOk = false;
     }
     if ($uploadOk == false) {
-        echo "<br>Sorry, your file was not uploaded.";
+        echo "<br>Sorry, your file was not uploaded.<br>Please <a href=\"../views/addEditItem.php\">Click Here To Try Again.</a>";
     } else {
         if (move_uploaded_file($fileTmpName, $target_file)) {
             echo "The file " . htmlspecialchars(basename($fileName)) . " has been uploaded.";
             return true;
         } else {
-            echo "Sorry, there was an error uploading your file.";
+            echo "Sorry, there was an error uploading your file.<br>Please <a href=\"../views/addEditItem.php\">Click Here To Try Again.</a>";
         }
     }
     return false;

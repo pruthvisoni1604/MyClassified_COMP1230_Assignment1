@@ -1,15 +1,15 @@
 <div>
     <div class="image">
-        <img src="/app/assets/img/<?= $item_info[4] ?>" alt="No No_Image_Available" width="300px">
+        <img src="/app/assets/img/<?= $item_details[$i][4] ?>" alt="Image load Error" width="300px">
     </div>
     <div class="itemMargin">
-        <h2><?= $item_info[0] ?></h2>
+        <h2><?= $item_details[$i][0] ?></h2>
     </div>
     <div class="itemMargin">
-        <p><?= $item_info[1] ?></p>
+        <p><?= $item_details[$i][1] ?></p>
     </div>
     <div class="itemMargin">
-        <p><i class="fa fa-shopping-cart" aria-hidden="true"></i> Price : $<?php echo $item_info[3]==0?" Free":$item_info[3] ?></p>
+        <p><i class="fa fa-shopping-cart" aria-hidden="true"></i> Price : $<?php echo $item_details[$i][3] == 0 ? " Free" : $item_details[$i][3] ?></p>
     </div>
     <?php
     if (isset($_SESSION["user_logged_in"])) {
@@ -19,7 +19,7 @@
                 <i class="fa fa-pencil" aria-hidden="true"></i>
                 Modify
             </button>
-            <button class="itemDeleteBtn" onclick="showAlert(<?=$i?>)">
+            <button class="itemDeleteBtn" onclick="showAlert(<?= $i ?>)">
                 <i class="fa fa-trash" aria-hidden="true"></i>
                 delete
             </button>

@@ -5,8 +5,9 @@ check_access(true);
 $items = 'class="active"';
 $editItem = $_REQUEST['edit'] ?? '-1';
 $edit = false;
+$item_info = [];
 if ($editItem != '-1') {
-    $item_info = explode(':', file('../itemDetails.txt')[$editItem]);
+    $item_info =  explode(':', file('../itemDetails.txt')[$editItem]);
     $item_info[1] = str_replace("<br/>", "\r\n", $item_info[1]);
     $edit = true;
 }
@@ -25,20 +26,6 @@ if ($editItem != '-1') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/app/assets/js/script.js"></script>
 </head>
-<style>
-    td {
-        padding: 10px;
-    }
-
-    label {
-        margin-right: 40px;
-    }
-
-    textarea {
-        width: 600px;
-        height: 100px;
-    }
-</style>
 
 <body>
     <?php
@@ -46,9 +33,9 @@ if ($editItem != '-1') {
     require_once("_sidenav.php");
     ?>
     <div class="main">
-        <h2 style="color: rgb(65, 168, 175); text-align: center; font-size: 20px;">Add new item</h2>
+        <h2 class="title">Add new item</h2>
         <table class="form">
-            <form action="../models/upload.php<?php echo $edit?"?edit=$editItem":"";?>" method="POST" enctype="multipart/form-data">
+            <form action="../models/addEditItem.php<?php echo $edit ? "?edit=$editItem" : ""; ?>" method="POST" enctype="multipart/form-data">
                 <tr>
                     <td>
                         <label for="title"> Title : </label>
@@ -58,7 +45,7 @@ if ($editItem != '-1') {
                 <tr>
                     <td>
                         <label for="description"> Description :</label>
-                        <textarea type="text" name="description" required><?= $item_info[1] ?? '' ?></textarea>
+                        <textarea type="text" name="description" placeholder="Enter Description" required><?= $item_info[1] ?? '' ?></textarea>
                     </td>
                 </tr>
                 <?php
@@ -89,7 +76,7 @@ if ($editItem != '-1') {
                     <td>
                         <label for="image">Image : </label>
                         <img id="output" width="200" src="../assets/img/<?= $item_info[4] ?? "" ?>" />
-                        <input type="file" name="file" id="img" accept="image/*" onchange="loadFile(event)" style="display:none;" />
+                        <input type="file" name="file" id="img" accept="image/*" onchange="loadFile(event)" style="display:none" />
                         <label for="img" class="itemModifyBtn">Click me to upload image</label>
 
                     </td>

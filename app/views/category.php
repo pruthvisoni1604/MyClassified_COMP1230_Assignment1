@@ -24,16 +24,16 @@ $category = 'class="active"';
     require_once("_navbarAdmin.php");
     ?>
 
-    <div style="padding: 20px;">
+    <div class="noSideNav">
         <div>
-            <h2 style="color: rgb(65, 168, 175); font-size: 20px;">Categories</h2>
-            <button id="mainButton" onclick="window.location.href='addEditCategory.php'" style="float: right;">
+            <h2 class="title">Categories</h2>
+            <button id="mainButton" onclick="window.location.href='addEditCategory.php'" class="floatRight">
                 <div id="btnMargin">
                     + Add New Category
                 </div>
             </button><br><br>
         </div><br>
-        <table border="1" style="border-collapse: collapse; width:100%" >
+        <table class="categoryTable">
             <tr>
                 <td>Name</td>
                 <td>Description</td>
@@ -45,10 +45,10 @@ $category = 'class="active"';
 
             for ($i = 0; $i < sizeof(file('../categoryDetails.txt')); $i++) {
                 $category_info = explode(':', file('../categoryDetails.txt')[$i]);
-                $count2=0;
+                $count2 = 0;
                 for ($j = 0; $j < sizeof(file('../itemDetails.txt')); $j++) {
                     $item_info = explode(':', file('../itemDetails.txt')[$j]);
-                    if($item_info[2]==$i){
+                    if ($item_info[2] == $i) {
                         $count2++;
                     }
                 }
@@ -56,7 +56,7 @@ $category = 'class="active"';
                 <tr>
                     <td><?= $category_info[0] ?></td>
                     <td><?= $category_info[1] ?></td>
-                    <td><?=$count2?></td>
+                    <td><?= $count2 ?></td>
                     <td>
                         <button id="mainButton" onclick="window.location.href='addEditCategory.php?edit=<?= $i ?>'">
                             <div id="btnMargin">

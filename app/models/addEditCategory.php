@@ -2,12 +2,14 @@
 
 $title = $_REQUEST['title'];
 $description = preg_replace("/\r\n|\r|\n/", '<br/>', $_REQUEST['description']);
-$description=str_replace(":"," ",$description);
+$description = str_replace(":", " ", $description);
+
 if (isset($_REQUEST['edit'])) {
     $editItem = $_REQUEST['edit'];
 
     $fileContent = file("../categoryDetails.txt");
     $file = fopen("../categoryDetails.txt", "w") or die("Unable to open file!");
+
     for ($i = 0; $i < sizeof($fileContent); $i++) {
         if ($editItem == $i) {
             $txt = "$title:$description\n";

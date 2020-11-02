@@ -1,3 +1,5 @@
-Books:You can Buy Books Here<br/>
-Electronics:you can buy elecronic<br/><br/>here
-Halloween items:qwer
+Books:Buy books of any type.
+Electronics:Electronics that you might need.
+Men's Fashion:Buy Men's clothing, footwear and more 
+Women's Fashion:Buy Women's clothing, footwear and more
+Home Accessories:Buy Home Accessories online delivered to your doorstep.

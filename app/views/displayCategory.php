@@ -1,5 +1,7 @@
 <?php
 session_start();
+include '../controllers/profile.php';
+
 $count = 0;
 $id = $_REQUEST['id'] ?? -1;
 ?>
@@ -28,23 +30,26 @@ $id = $_REQUEST['id'] ?? -1;
     require_once("_sidenav.php");
     ?>
     <div class="main">
-        <h2 style="color: rgb(65, 168, 175); font-size: 20px;">ujyhtgrfedwskjuyhgtfrde</h2>
-        <button id="mainButton" onclick="window.location.href='addEditCategory.php'" style="float: right;">
+        <h2 class="title">
+            <?php
+            if ($id != -1) {
+                echo $category_details[$id][0];
+            } ?>
+        </h2>
+        <button id="mainButton" onclick="window.location.href='addEditCategory.php'" class="floatRight">
             <div id="btnMargin">
                 + Add New Item
             </div>
         </button>
         <?php
         if ($id != -1) {
-            for ($i = 0; $i < sizeof(file('../itemDetails.txt')); $i++) {
-                $item_info = explode(':', file('../itemDetails.txt')[$i]);
-                if ($item_info[2] == $id) {
+            for ($i = 0; $i < sizeof($item_details); $i++) {
+                if ($item_details[$i][2] == $id) {
                     include('_item.php');
                     $count = 1;
                 }
             }
-        }
-        else{
+        } else {
             echo "No content to show!";
         }
         if ($count == 0) {
