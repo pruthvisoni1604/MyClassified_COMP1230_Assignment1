@@ -6,8 +6,9 @@
         <button class="dropBtn" onclick="dropFunction()">Categories &#9662;</button>
         <div class="dropdown-content" id="dropdown">
             <?php
-            for ($i = 0; $i < sizeof($category_details); $i++) {
-                echo "<a href=\"/app/views/displayCategory.php?id=$i\">" . $category_details[$i][0] . "</a>";
+            $result = mysqli_query($conn, "SELECT id,name FROM category where status='SHOW'");
+            while ($row = mysqli_fetch_array($result)) {
+                echo "<a href=\"/app/views/displayCategory.php?id=" . $row['id'] . "\">" . $row['name'] . "</a>";
             }
             ?>
         </div>

@@ -13,7 +13,7 @@ $items = 'class="active"';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creating a responsive website with the help of html,css and php">
     <meta name="keywords" content="">
-    <link rel="stylesheet" href="/app/assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/app/assets/js/script.js"></script>
 </head>
@@ -41,9 +41,11 @@ $items = 'class="active"';
         <?php
         }
         $count = 0;
-        for ($i = 0; $i < sizeof($item_details); $i++) {
+
+        $result = mysqli_query($conn, "SELECT * FROM items");
+        while ($row = mysqli_fetch_array($result)) {
             include('_item.php');
-            $count = 1;
+            $count++;
         }
         if ($count == 0) {
             echo 'There is no Records to show.';

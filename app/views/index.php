@@ -13,7 +13,7 @@ include("../controllers/profile.php")
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creating a responsive website with the help of html,css and php">
     <meta name="keywords" content="">
-    <link rel="stylesheet prefetch" href="/app/assets/css/style.css">
+    <link rel="stylesheet prefetch" href="../assets/css/style.css">
     <link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/app/assets/js/script.js"></script>
 

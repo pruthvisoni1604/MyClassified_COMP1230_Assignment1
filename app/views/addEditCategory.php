@@ -7,8 +7,8 @@ $editItem = $_REQUEST['edit'] ?? '-1';
 $edit = false;
 $category_info = [];
 if ($editItem != '-1') {
-    $category_info = explode(':', file('../categoryDetails.txt')[$editItem]);
-    $category_info[1] = str_replace("<br/>", "\r\n", $category_info[1]);
+    $result = mysqli_query($conn, "SELECT * FROM category where id =" . $editItem);
+    $row = mysqli_fetch_array($result);
     $edit = true;
 }
 ?>
@@ -22,7 +22,7 @@ if ($editItem != '-1') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creating a responsive website with the help of html,css and php">
     <meta name="keywords" content="">
-    <link rel="stylesheet" href="/app/assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/app/assets/js/script.js"></script>
 </head>
@@ -39,13 +39,13 @@ if ($editItem != '-1') {
                 <tr>
                     <td>
                         <label for="title"> Title : </label>
-                        <input type="text" name="title" placeholder="Enter Title" style="width : 600px" value="<?= $category_info[0] ?? '' ?>" required>
+                        <input type="text" name="title" placeholder="Enter Title" style="width : 600px" value="<?= $row['name'] ?? '' ?>" required>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label for="description"> Description :</label>
-                        <textarea type="text" name="description" required><?= $category_info[1] ?? '' ?></textarea>
+                        <textarea type="text" name="description" required><?= $row['desc'] ?? '' ?></textarea>
                     </td>
                 </tr>
                 <tr>

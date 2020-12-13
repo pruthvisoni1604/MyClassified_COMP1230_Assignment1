@@ -14,7 +14,7 @@ $category = 'class="active"';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creating a responsive website with the help of html,css and php">
     <meta name="keywords" content="">
-    <link rel="stylesheet" href="/app/assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/app/assets/js/script.js"></script>
 </head>
@@ -43,22 +43,22 @@ $category = 'class="active"';
             <?php
             $count = 0;
 
-            for ($i = 0; $i < sizeof(file('../categoryDetails.txt')); $i++) {
-                $category_info = explode(':', file('../categoryDetails.txt')[$i]);
+            $result = mysqli_query($conn, "SELECT * FROM category where status='SHOW'");
+            while ($row = mysqli_fetch_array($result)) {
+                $result2 = mysqli_query($conn, "SELECT cat_id FROM items");
                 $count2 = 0;
-                for ($j = 0; $j < sizeof(file('../itemDetails.txt')); $j++) {
-                    $item_info = explode(':', file('../itemDetails.txt')[$j]);
-                    if ($item_info[2] == $i) {
+                while ($row2 = mysqli_fetch_array($result2)) {
+                    if ($row2['cat_id'] == $row['id']) {
                         $count2++;
                     }
                 }
             ?>
                 <tr>
-                    <td><?= $category_info[0] ?></td>
-                    <td><?= $category_info[1] ?></td>
+                    <td><?= $row['name'] ?></td>
+                    <td><?= $row['desc'] ?></td>
                     <td><?= $count2 ?></td>
                     <td>
-                        <button id="mainButton" onclick="window.location.href='addEditCategory.php?edit=<?= $i ?>'">
+                        <button id="mainButton" onclick="window.location.href='addEditCategory.php?edit=<?= $row['id'] ?>'">
                             <div id="btnMargin">
                                 <i class="fa fa-pencil" aria-hidden="true"></i> Modify
                             </div>

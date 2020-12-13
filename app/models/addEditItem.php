@@ -1,9 +1,9 @@
 <?php
+include_once("../config/db.php");
 
 if (isset($_POST['submit'])) {
     $title = $_REQUEST['title'];
-    $description = preg_replace("/\r\n|\r|\n/", '<br/>', $_REQUEST['description']);
-    $description = str_replace(":", " ", $description);
+    $description = $_REQUEST['description'];
     $category = $_REQUEST['categories'] ?? "";
     $price = $_REQUEST['price'];
     $imageName = $category . "_" . $title . "_" . $price;
@@ -11,46 +11,41 @@ if (isset($_POST['submit'])) {
     $editItem = $_REQUEST['edit'] ?? -1;
 
     if ($editItem != -1) {
-        $fileName = $_FILES['file']['name'];
-        $fileContent = file("../itemDetails.txt");
-        $file = fopen("../itemDetails.txt", "w") or die("Unable to open file!");
-        for ($i = 0; $i < sizeof($fileContent); $i++) {
-            if ($editItem == $i) {
-                $item_info = explode(":", $fileContent[$i]);
-                $category = $item_info[2];
-                if ($fileName == "") {
-                    $txt = "$title:$description:$category:$price:$item_info[4]";
-                } else {
-                    $imageName = $category . "_" . $title . "_" . $price;
-                    if (imageUpload($imageName, false)) {
-                        $txt = "$title:$description:$category:$price:$imageName" . "." . strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION)) . "\n";
-                    }
-                }
-            } else {
-                $txt = $fileContent[$i];
+        $fileName = $_FILES['file']['name'] ?? '';
+        if ($fileName == "") {
+            $sql = "UPDATE `items` SET `title`='$title',`desc`='$description',`price`=$price WHERE id =$editItem";
+        } else {
+            $imageName = $category . "_" . $title . "_" . $price;
+            if (imageUpload($imageName, false)) {
+                $imageName = $imageName . "." . strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
+                $sql = "UPDATE `items` SET `title`='$title',`desc`='$description',`price`=$price,`img_name`='$imageName' WHERE id =$editItem";
             }
-            fwrite($file, $txt);
         }
-        header("location: ../views/displayCategory.php?id=$category");
+
+        if (mysqli_query($conn, $sql)) {
+            header("location: ../views/items.php");
+        } else {
+            echo "Unable to save post";
+        }
     } else {
         if (imageUpload($imageName, true)) {
-            $file = fopen("../itemDetails.txt", "a") or die("Unable to open file!");
             if ($_FILES['file']['name'] == "") {
                 $imageName = "No_Image_Available.png";
             } else {
                 $imageName = $imageName . "." . strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
             }
-            $txt = "$title:$description:$category:$price:$imageName\n";
-            fwrite($file, $txt);
-            fclose($file);
-            header("location: ../views/items.php");
+            $sql = "INSERT INTO `items`(`title`, `desc`, `price`, `cat_id`, `img_name`, `status`, `front_page`) VALUES ('$title','$description',$price,$category,'$imageName','SHOW','YES')";
+            $result = mysqli_query($conn, $sql);
+            if ($result)
+                header("location: ../views/items.php");
+            else
+                echo "<br>adding data was failed";
         }
     }
 }
 function imageUpload($fileNameToBe, $checkSameName)
 {
     $fileName = $_FILES['file']['name'];
-    echo $fileName;
     $uploadOk = true;
     $imageFileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
     $target_file = "../assets/img/" . $fileNameToBe . "." . $imageFileType;
@@ -78,7 +73,7 @@ function imageUpload($fileNameToBe, $checkSameName)
         echo "<br>Sorry, your file was not uploaded.<br>Please <a href=\"../views/addEditItem.php\">Click Here To Try Again.</a>";
     } else {
         if (move_uploaded_file($fileTmpName, $target_file)) {
-            echo "The file " . htmlspecialchars(basename($fileName)) . " has been uploaded.";
+            echo "The file " . htmlspecialchars(basename($fileName)) . " has been uploaded.<br>Please <a href=\"../views/items.php\">Click Here To go back.</a>";
             return true;
         } else {
             echo "Sorry, there was an error uploading your file.<br>Please <a href=\"../views/addEditItem.php\">Click Here To Try Again.</a>";

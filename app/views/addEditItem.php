@@ -5,10 +5,8 @@ check_access(true);
 $items = 'class="active"';
 $editItem = $_REQUEST['edit'] ?? '-1';
 $edit = false;
-$item_info = [];
 if ($editItem != '-1') {
-    $item_info =  explode(':', file('../itemDetails.txt')[$editItem]);
-    $item_info[1] = str_replace("<br/>", "\r\n", $item_info[1]);
+    $result1 = mysqli_query($conn, "SELECT * FROM items where id =" . $editItem);
     $edit = true;
 }
 ?>
@@ -22,7 +20,7 @@ if ($editItem != '-1') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creating a responsive website with the help of html,css and php">
     <meta name="keywords" content="">
-    <link rel="stylesheet" href="/app/assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/app/assets/js/script.js"></script>
 </head>
@@ -31,6 +29,7 @@ if ($editItem != '-1') {
     <?php
     require_once("_navbarAdmin.php");
     require_once("_sidenav.php");
+    $row = mysqli_fetch_array($result1);
     ?>
     <div class="main">
         <h2 class="title">Add new item</h2>
@@ -39,13 +38,13 @@ if ($editItem != '-1') {
                 <tr>
                     <td>
                         <label for="title"> Title : </label>
-                        <input type="text" name="title" placeholder="Enter Title" style="width : 600px" value="<?= $item_info[0] ?? '' ?>" required>
+                        <input type="text" name="title" placeholder="Enter Title" style="width : 600px" value="<?= $row['title'] ?? '' ?>" required>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label for="description"> Description :</label>
-                        <textarea type="text" name="description" placeholder="Enter Description" required><?= $item_info[1] ?? '' ?></textarea>
+                        <textarea type="text" name="description" placeholder="Enter Description" required><?= $row['desc'] ?? '' ?></textarea>
                     </td>
                 </tr>
                 <?php
@@ -56,8 +55,9 @@ if ($editItem != '-1') {
                             <label for="categories">Categories :</label>
                             <select name="categories" id="categories" required>
                                 <?php
-                                for ($i = 0; $i < sizeof($category_details); $i++) {
-                                    echo "<option value='$i'>" . $category_details[$i][0] . "</option>";
+                                $result = mysqli_query($conn, "SELECT id,name FROM category");
+                                while ($row = mysqli_fetch_array($result)) {
+                                    echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
                                 }
                                 ?>
                             </select>
@@ -69,16 +69,15 @@ if ($editItem != '-1') {
                 <tr>
                     <td>
                         <label for="price">Price :</label>
-                        <input type="number" name="price" placeholder="Enter Price" value="<?= $item_info[3] ?? '' ?>" required>
+                        <input type="number" name="price" placeholder="Enter Price" value="<?= $row['price'] ?? '' ?>" required>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label for="image">Image : </label>
-                        <img id="output" width="200" src="../assets/img/<?= $item_info[4] ?? "" ?>" />
+                        <img id="output" width="200" src="../assets/img/<?= $row['img_name'] ?? "" ?>" />
                         <input type="file" name="file" id="img" accept="image/*" onchange="loadFile(event)" style="display:none" />
                         <label for="img" class="itemModifyBtn">Click me to upload image</label>
-
                     </td>
                 </tr>
                 <tr>

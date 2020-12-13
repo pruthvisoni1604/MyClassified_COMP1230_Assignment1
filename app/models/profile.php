@@ -14,12 +14,31 @@ function check_access($redirect)
 }
 function checkAdminDetails()
 {
-    for ($i = 0; $i < sizeof(file('../adminDetails.txt')); $i++) {
-        $admin_info = explode(':', file('../adminDetails.txt')[$i]);
-        if ($admin_info[0] == get('username') && trim($admin_info[1]) == md5(get('password'))) {
-            $_SESSION["user_logged_in"] = true;
-            header('Location: index.php');
-            exit();
+    $username = get('username');
+    if ($username == "") {
+        return;
+    }
+    $password = md5(get('password'));
+
+    $con = new mysqli("localhost", "f0t13_root", "q1!w2@E3#", "f0t13_my_classified");
+    if ($con->connect_error) {
+        die("Failed to connect:" . $con->connect_error);
+    } else {
+        $stmt = $con->prepare("select * from members where username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt_result = $stmt->get_result();
+        if ($stmt_result->num_rows > 0) {
+            $data = $stmt_result->fetch_assoc();
+            if ($data['password'] === $password) {
+                $_SESSION["user_logged_in"] = true;
+                header('Location: index.php');
+                exit();
+            } else {
+                echo "invalid pass";
+            }
+        } else {
+            echo "invalid username";
         }
     }
 }

@@ -2,7 +2,6 @@
 session_start();
 include '../controllers/profile.php';
 
-$count = 0;
 $id = $_REQUEST['id'] ?? -1;
 ?>
 <!DOCTYPE html>
@@ -15,7 +14,7 @@ $id = $_REQUEST['id'] ?? -1;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creating a responsive website with the help of html,css and php">
     <meta name="keywords" content="">
-    <link rel="stylesheet" href="/app/assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/app/assets/js/script.js"></script>
 
@@ -33,27 +32,30 @@ $id = $_REQUEST['id'] ?? -1;
         <h2 class="title">
             <?php
             if ($id != -1) {
-                echo $category_details[$id][0];
+                $result = mysqli_query($conn, "SELECT name FROM category where id=" . $id);
+                echo mysqli_fetch_array($result)['name'];
             } ?>
         </h2>
-        <button id="mainButton" onclick="window.location.href='addEditCategory.php'" class="floatRight">
-            <div id="btnMargin">
-                + Add New Item
-            </div>
-        </button>
+        <?php if (isset($_SESSION['user_logged_in'])) { ?>
+            <button id="mainButton" onclick="window.location.href='addEditCategory.php'" class="floatRight">
+                <div id="btnMargin">
+                    + Add New Item
+                </div>
+            </button>
         <?php
+        }
         if ($id != -1) {
-            for ($i = 0; $i < sizeof($item_details); $i++) {
-                if ($item_details[$i][2] == $id) {
-                    include('_item.php');
-                    $count = 1;
-                }
+            $count = 0;
+            $result = mysqli_query($conn, "SELECT * FROM items where cat_id=" . $id);
+            while ($row = mysqli_fetch_array($result)) {
+                include('_item.php');
+                $count++;
+            }
+            if ($count == 0) {
+                echo 'There is no Records to show.';
             }
         } else {
             echo "No content to show!";
-        }
-        if ($count == 0) {
-            echo 'There is no Records to show.';
         }
         ?>
     </div>
